@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'custom_list_page.dart';
 
 void main() {
   runApp(const RandomizerApp());
@@ -34,7 +35,7 @@ class _RandomizerHomeState extends State<RandomizerHome> {
   String _result = 'Tap a button to get started!';
 
   void _rollDice() {
-    int number = _random.nextInt(6) + 1; // 1-6
+    int number = _random.nextInt(6) + 1; // 1–6
     setState(() {
       _result = '🎲 You rolled a $number!';
     });
@@ -50,9 +51,7 @@ class _RandomizerHomeState extends State<RandomizerHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Randomizer App'),
-      ),
+      appBar: AppBar(title: const Text('Randomizer App')),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -77,6 +76,19 @@ class _RandomizerHomeState extends State<RandomizerHome> {
             ],
           ),
         ),
+      ),
+
+      // ➤ Floating Action Button for Page 2
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => const CustomListPage(),
+            ),
+          );
+        },
+        child: const Icon(Icons.list),
       ),
     );
   }
