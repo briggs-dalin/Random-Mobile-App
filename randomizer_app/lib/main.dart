@@ -14,7 +14,11 @@ class RandomizerApp extends StatelessWidget {
     return MaterialApp(
       title: 'Randomizer App',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        brightness: Brightness.dark, // Dark mode
+        colorScheme: ColorScheme.dark(
+          primary: Colors.deepPurple,
+          secondary: Colors.orangeAccent,
+        ),
         useMaterial3: true,
       ),
       home: const RandomizerHome(),
@@ -35,7 +39,7 @@ class _RandomizerHomeState extends State<RandomizerHome> {
   String _result = 'Tap a button to get started!';
 
   void _rollDice() {
-    int number = _random.nextInt(6) + 1; // 1–6
+    int number = _random.nextInt(20) + 1; // 1–20
     setState(() {
       _result = '🎲 You rolled a $number!';
     });
@@ -51,6 +55,7 @@ class _RandomizerHomeState extends State<RandomizerHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[900], // Dark background
       appBar: AppBar(title: const Text('Randomizer App')),
       body: Center(
         child: Padding(
@@ -61,24 +66,42 @@ class _RandomizerHomeState extends State<RandomizerHome> {
               Text(
                 _result,
                 textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 24),
+                style: const TextStyle(fontSize: 24, color: Colors.white),
               ),
               const SizedBox(height: 30),
-              ElevatedButton(
-                onPressed: _rollDice,
-                child: const Text('Roll Dice'),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: _rollDice,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.deepPurple,
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: const Text('Roll Dice', style: TextStyle(color: Colors.white)),
+                ),
               ),
               const SizedBox(height: 10),
-              ElevatedButton(
-                onPressed: _flipCoin,
-                child: const Text('Flip Coin'),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: _flipCoin,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.deepPurple,
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: const Text('Flip Coin', style: TextStyle(color: Colors.white)),
+                ),
               ),
             ],
           ),
         ),
       ),
-
-      // ➤ Floating Action Button for Page 2
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
@@ -88,7 +111,8 @@ class _RandomizerHomeState extends State<RandomizerHome> {
             ),
           );
         },
-        child: const Icon(Icons.list),
+        backgroundColor: Colors.orangeAccent,
+        child: const Icon(Icons.list, color: Colors.white),
       ),
     );
   }
